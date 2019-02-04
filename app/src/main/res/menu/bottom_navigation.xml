@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/boost_menu"
+            android:title="@string/boost"
+            android:icon="@drawable/vector_drawable_races"/>
+    <item
+            android:id="@+id/performance_menu"
+            android:title="@string/performance"
+            android:icon="@drawable/vector_drawable_statistics"/>
+</menu>

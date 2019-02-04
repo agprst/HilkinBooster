@@ -1,33 +1,31 @@
 package id.mintlab.hilkinbooster
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.animation.AnimationUtils
-import android.view.animation.Animation
-import android.widget.Button
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.MenuItem
+import androidx.fragment.app.Fragment
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
-        val animation: Animation
-        animation = AnimationUtils.loadAnimation(
-            applicationContext,
-            R.anim.zoom_in
-        )
-        val animation2: Animation
-        animation2 = AnimationUtils.loadAnimation(
-            applicationContext,
-            R.anim.zoom_out
-        )
-        val view = findViewById<View>(R.id.waveCircle)
-        val button1 = findViewById<Button>(R.id.button1)
-        button1.setOnClickListener {
-            button1.startAnimation(animation2)
-        }
-        view.startAnimation(animation)
+        setContentView(R.layout.activity_main)
+
+        val btmNav = findViewById<BottomNavigationView>(R.id.nav_bottom)
+        btmNav.setOnNavigationItemSelectedListener(this)
+        btmNav.selectedItemId = R.id.boost_menu
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var fragment: Fragment? = null
+        when (item.getItemId()) {
+            R.id.boost_menu -> fragment = BoostFragment()
+            R.id.performance_menu -> fragment = HwInfoFragment()
+        }
+        showFragment(fragment, R.id.fragment_container)
+        return true
+    }
+
+
 }

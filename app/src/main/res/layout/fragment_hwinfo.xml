@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+    <com.hookedonplay.decoviewlib.DecoView
+            android:id="@+id/cpuChart" android:layout_marginTop="128dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.hookedonplay.decoviewlib.DecoView
+            android:id="@+id/ramChart" android:layout_marginTop="128dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+
+    <com.hookedonplay.decoviewlib.DecoView
+            android:id="@+id/storageChart" android:layout_marginTop="128dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginTop="8dp" android:id="@+id/textView"
+              app:layout_constraintTop_toBottomOf="@+id/cpuChart"
+              android:text="CPU" android:textColor="@color/textGrey" android:layout_marginStart="52dp"
+              app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginTop="8dp" android:id="@+id/textView2"
+              app:layout_constraintTop_toBottomOf="@+id/ramChart"
+              android:text="RAM" android:textColor="@color/textGrey"
+              android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+              app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              app:layout_constraintTop_toBottomOf="@+id/storageChart"
+              android:text="Storage" android:textColor="@color/textGrey" app:layout_constraintEnd_toEndOf="parent"
+              android:layout_marginEnd="44dp" android:id="@+id/textView3"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
