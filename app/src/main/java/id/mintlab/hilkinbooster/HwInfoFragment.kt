@@ -11,6 +11,7 @@ import com.hookedonplay.decoviewlib.charts.SeriesItem
 import com.hookedonplay.decoviewlib.events.DecoEvent
 
 class HwInfoFragment : Fragment() {
+
     var cpuChart : DecoView? = null
     var ramChart : DecoView? = null
     var storageChart : DecoView? = null
@@ -29,19 +30,22 @@ class HwInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Create data series track
-        val cpuSeries = SeriesItem.Builder(Color.parseColor("#ffbaba"))
+        val cpuSeries = SeriesItem.Builder(Color.argb(255, 255, 0, 0), Color.argb(255, 64, 255, 64))
             .setRange(0f, 100f, 0f)
             .setLineWidth(32f)
+            .setChartStyle(SeriesItem.ChartStyle.STYLE_LINE_HORIZONTAL)
             .build()
 
-        val ramSeries = SeriesItem.Builder(Color.parseColor("#aed8ff"))
+        val ramSeries = SeriesItem.Builder(Color.argb(255, 255, 0, 0), Color.argb(255, 64, 255, 64))
             .setRange(0f, 100f, 0f)
             .setLineWidth(32f)
+            .setChartStyle(SeriesItem.ChartStyle.STYLE_LINE_VERTICAL)
             .build()
 
-        val storageSeries = SeriesItem.Builder(Color.argb(255, 64, 255, 64), Color.argb(255, 255, 0, 0))
+        val storageSeries = SeriesItem.Builder(Color.argb(255, 255, 0, 0), Color.argb(255, 64, 255, 64))
             .setRange(0f, 100f, 0f)
             .setLineWidth(32f)
+            .setChartStyle(SeriesItem.ChartStyle.STYLE_PIE)
             .build()
 
         val cpuIndex = cpuChart?.addSeries(cpuSeries)!!
