@@ -22,9 +22,10 @@ import android.content.Context.ACTIVITY_SERVICE
 
 open class HwInfoFragment : Fragment() {
 
-
     var lineChart : LineChart? = null
     var index : Float = 0f
+    var thread : Thread? = null
+    private var entries = ArrayList<Entry>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -35,15 +36,33 @@ open class HwInfoFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        updateData()
-
+    override fun onPause() {
+        super.onPause()
+        thread?.interrupt()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("entries", entries)
+        outState.putFloat("index", index)
+        Log.d("", "test")
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null){
+            entries = savedInstanceState.getParcelableArrayList("entries")
+            index = savedInstanceState.getFloat("index")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
+
+
     @Synchronized fun updateData(){
-        val entries = ArrayList<Entry>()
         var lineData : LineData
         lineChart?.xAxis?.textColor = Color.TRANSPARENT
         lineChart?.axisLeft?.textColor = Color.TRANSPARENT
@@ -56,10 +75,10 @@ open class HwInfoFragment : Fragment() {
         lineChart?.description = description
 
 
-
-        Thread(
+        thread  = Thread(
             Runnable {
                 while (true){
+
                     entries.add(Entry(index, Random.nextInt(10).toFloat()))
                     lineData = LineData(LineDataSet(entries, ""))
                     lineData.setValueTextColor(Color.GRAY)
@@ -69,13 +88,19 @@ open class HwInfoFragment : Fragment() {
                     lineChart?.moveViewToX(index)
                     index++
                     info()
-                    Thread.sleep(1000)
+                    try {
+                        Thread.sleep(1000)
+                    } catch(e : InterruptedException){
+                        Log.d("Interupted", e.toString())
+                    }
                 }
-            }).start()
+            })
+        thread?.start()
     }
 
     fun info(){
-        val activityMgr = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        if (context == null){ return }
+        val activityMgr = context?.getSystemService(ACTIVITY_SERVICE) as ActivityManager
         val memoryInfo = ActivityManager.MemoryInfo()
         activityMgr.getMemoryInfo(memoryInfo)
 
