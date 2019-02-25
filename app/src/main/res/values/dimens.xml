@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="small_4">4dp</dimen>
-    <dimen name="small_8">8dp</dimen>
-    <dimen name="small_10">10dp</dimen>
-    <dimen name="medium_14">14dp</dimen>
-    <dimen name="medium_16">16dp</dimen>
-    <dimen name="medium_18">18dp</dimen>
-    <dimen name="large_20">20dp</dimen>
-    <dimen name="large_22">22dp</dimen>
-    <dimen name="large_24">14dp</dimen>
-
+	<dimen name="small_4">4dp</dimen>
+	<dimen name="small_8">8dp</dimen>
+	<dimen name="small_10">10dp</dimen>
+	<dimen name="medium_14">14dp</dimen>
+	<dimen name="medium_16">16dp</dimen>
+	<dimen name="medium_18">18dp</dimen>
+	<dimen name="large_20">20dp</dimen>
+	<dimen name="large_22">22dp</dimen>
+	<dimen name="large_24">14dp</dimen>
+	<dimen name="dimen_32dp">32dp</dimen>
 </resources>

@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HilkinBooster</string>
-
-    <string name="boost">Boost</string>
-    <string name="performance">Performance</string>
+	<string name="app_name">HilkinBooster</string>
+	<string name="boost">Boost</string>
+	<string name="performance">Performance</string>
 </resources>

@@ -19,7 +19,6 @@ import kotlin.random.Random
 import android.app.ActivityManager
 import android.content.Context.ACTIVITY_SERVICE
 
-
 open class HwInfoFragment : Fragment() {
 
     var lineChart : LineChart? = null
