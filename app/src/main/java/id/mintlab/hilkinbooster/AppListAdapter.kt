@@ -3,6 +3,7 @@ package id.mintlab.hilkinbooster
 import java.util.ArrayList
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class AppListAdapter(private val context: Context) : BaseAdapter() {
+class AppListAdapter(private val context: Context?, private val objects : List<ResolveInfo>?) : BaseAdapter() {
 
-    private val objects = ArrayList<ResolveInfo>()
     private val layoutInflater: LayoutInflater
 
     init {
@@ -21,11 +21,11 @@ class AppListAdapter(private val context: Context) : BaseAdapter() {
     }
 
     override fun getCount(): Int {
-        return objects.size
+        return if (objects?.size != null) objects.size else 0
     }
 
-    override fun getItem(position: Int): ResolveInfo {
-        return objects[position]
+    override fun getItem(position: Int): ResolveInfo? {
+        return objects?.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -41,15 +41,20 @@ class AppListAdapter(private val context: Context) : BaseAdapter() {
         initializeViews(getItem(position), convertView.tag as ViewHolder)
         return convertView
     }
-
-
-    private fun initializeViews(`object`: ResolveInfo, holder: ViewHolder) {
+    private fun initializeViews(`object`: ResolveInfo?, holder: ViewHolder) {
         //TODO implement
+        val icon = context?.packageManager?.getApplicationIcon(`object`?.activityInfo?.packageName)
+        holder.ivAppIcon.setImageDrawable(icon)
+        holder.tvAppLabel.text = `object`?.activityInfo?.packageName
+
+
     }
 
     protected inner class ViewHolder(view: View) {
-        private val ivAppIcon: ImageView
-        private val tvAppLabel: TextView
+        open val ivAppIcon: ImageView
+        open val tvAppLabel: TextView
+
+
 
         init {
             ivAppIcon = view.findViewById<View>(R.id.ivAppIcon) as ImageView
