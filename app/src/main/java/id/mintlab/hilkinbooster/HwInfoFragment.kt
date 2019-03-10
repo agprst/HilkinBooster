@@ -33,7 +33,6 @@ open class HwInfoFragment : Fragment() {
     }
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-
     }
 
 }
